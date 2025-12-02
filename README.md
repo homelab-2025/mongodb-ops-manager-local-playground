@@ -131,3 +131,31 @@ sudo /opt/mongodb-mms-automation/bin/mongodb-mms-automation-agent -config /etc/m
 # or via systemd
 sudo systemctl start mongodb-mms-automation-agent
 ```
+
+## Troubleshooting
+
+If you forgot your admin password, and the SMTP settings are not working, you can recreate the admin account doing the following:
+
+1. Stop the Ops Manager service:
+
+```bash
+sudo /opt/mongodb/mms/bin/mongodb-mms stop
+```
+
+2. Connect to the MongoDB database used by Ops Manager:
+
+```bash
+mongosh --port 27017
+```
+
+3. Switch to the `use mmsdbconfig` database and delete the admin user:
+
+```bash
+use mmsdbconfig
+db.config.users.find({})
+db.config.users.deleteOne({ _id: ObjectId("<admin_id>") })
+```
+
+4. Exit the MongoDB shell and restart the Ops Manager service:
+
+5. Create a new admin user through the web interface.
