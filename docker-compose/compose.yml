@@ -1,0 +1,31 @@
+# Compose for MongoDB Ops Manager Local Playground
+services:
+  om-mongodb-backend:
+      image: mongo:8.0
+      container_name: om-mongodb-backend
+      restart: always
+      ports:
+        - "27017:27017"
+      volumes:
+        - mongo_om_data:/data/db
+      networks:
+        - om-network
+
+  opsmanager:
+    depends_on:
+      - om-mongodb-backend
+    build: .
+    container_name: opsmanager
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - om-network
+
+volumes:
+  mongo_om_data:
+
+networks:
+  om-network:
+    driver: bridge
+  
