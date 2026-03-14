@@ -1,6 +1,6 @@
 # mongodb-ops-manager-local-playground
 
-This guide provides instructions to set up a local playground environment for MongoDB Ops Manager using Ubuntu 24.04 on wsl2.
+This guide provides instructions to set up a local playground environment for MongoDB Ops Manager using Docker Compose.
 
 ## Prerequisites
 
